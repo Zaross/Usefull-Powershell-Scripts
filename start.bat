@@ -6,7 +6,6 @@ setlocal enabledelayedexpansion
 set SCRIPT_PATH=%~dp0scripts
 set CONFIG_FILE=%~dp0config.ini
 
-:: Admin-Rechte prüfen
 net session >nul 2>&1
 if %errorLevel% neq 0 (
     echo.
@@ -17,7 +16,6 @@ if %errorLevel% neq 0 (
     exit
 )
 
-:: Debug-Ausgabe
 echo Lade Konfiguration aus %CONFIG_FILE%
 
 for /f "tokens=1,2 delims==" %%A in (%CONFIG_FILE%) do (
@@ -25,7 +23,6 @@ for /f "tokens=1,2 delims==" %%A in (%CONFIG_FILE%) do (
     if "%%A"=="COLOR" set COLOR=%%B
 )
 
-:: Debug-Ausgabe
 echo TITLE=%TITLE%
 echo COLOR=%COLOR%
 
@@ -42,7 +39,6 @@ for /f "tokens=1,2,3 delims=," %%A in ('findstr /R "^.*=.*" %CONFIG_FILE%') do (
     )
 )
 
-:: Debug-Ausgabe
 echo COUNT=%COUNT%
 for /L %%N in (1,1,%COUNT%) do (
     echo MENU_%%N=!MENU_%%N!
